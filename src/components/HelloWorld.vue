@@ -1,59 +1,81 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript" target="_blank" rel="noopener">typescript</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+  <v-container fluid class="pa-0">
+    <v-img
+      :src="require('@/assets/oberbayern.jpg')"
+      :lazy-src="require('@/assets/oberbayern_pre.jpg')"
+      :height="bgHeigth"
+    > 
+      <v-sheet
+        color="transparent"
+        :height="bgHeigth"
+        class="overflow-y-auto"
+        :max-height="bgHeigth"
+      >
+      <v-row no-gutters align="start">
+        <v-col key="1" cols="2"></v-col>
+        <v-col key="2" cols="8">
+          <v-card
+            class="my-10"
+          >
+            <v-toolbar color="grey darken-3" height="80px">
+              <v-container fluid class="pa-0">
+                <v-row no-gutters class="mt-12 white--text">
+                  <h1 class="headline">XRechnung validieren und visualisieren</h1>
+                </v-row>
+              </v-container>
+            </v-toolbar>
+            <v-toolbar color="grey darken-4" class="white--text" height="60px">
+              <span>{{count}} on {{listHeight}}px</span>
+            </v-toolbar>
+            
+              <v-list>
+              <v-list-item
+                v-for="i in count"
+                :key="i"
+                dark
+                class="black--text"
+              >
+                <v-list-item-icon>
+                  <v-icon class="black--text">mdi-file</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title class="black--text">Foo Item {{i}}</v-list-item-title>
+                  <v-list-item-subtitle class="black--text">The subtitle for the... Foo</v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-action >
+                  <v-icon class="black--text">mdi-cloud-download</v-icon>
+                </v-list-item-action>
+                </v-list-item>
+              </v-list>
+          </v-card>
+        </v-col>
+        <v-col cols="2" key="3"></v-col>
+      </v-row>
+      </v-sheet>
+    </v-img>
+  </v-container>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import Vue from 'vue'
+import { Component } from 'vue-property-decorator'
 
 @Component
-export default class HelloWorld extends Vue {
-  @Prop() private msg!: string;
+export default class Helloworld extends Vue {
+ 
+  count: number = 100
+
+  get bgHeigth() {
+    return this.$vuetify.breakpoint.height - 147
+  }
+
+  get cardHeight() {
+    return this.$vuetify.breakpoint.height - 147 - 60
+  }
+
+  get listHeight() {
+    return this.$vuetify.breakpoint.height - 147 - 60 - 140 - 5
+  }
+
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
